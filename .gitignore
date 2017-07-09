@@ -1,4 +1,10 @@
+.settings/
 target/
+validation/
+.classpath
+.project
+.metadata/
+RemoveSystemTempFiles/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
