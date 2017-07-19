@@ -1,3 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  ERCOT CIM Processor
+  %%
+  Copyright (C) 2017 OmniPrise, LLC
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -15,6 +35,7 @@
 		<maven-compiler-plugin-version>2.5.1</maven-compiler-plugin-version>
 		<maven-resources-plugin-version>2.4.3</maven-resources-plugin-version>
 		<maven-resources-plugin-encoding>UTF-8</maven-resources-plugin-encoding>
+		<license-maven-plugin-version>1.13</license-maven-plugin-version>
 		<cxf-xjc-plugin-version>2.7.0</cxf-xjc-plugin-version>
 		<maven-assembly-plugin-version>2.4</maven-assembly-plugin-version>
 		<commons-lang-version>3.3.2</commons-lang-version>
@@ -52,6 +73,12 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-csv</artifactId>
 			<version>${commons-csv-version}</version>
+		</dependency>
+		<!-- licensing -->
+		<dependency>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>license-maven-plugin</artifactId>
+			<version>${license-maven-plugin-version}</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -98,7 +125,8 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>				<plugin>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-xjc-plugin</artifactId>
 				<version>${cxf-xjc-plugin-version}</version>
@@ -126,7 +154,32 @@
 					</execution>
 				</executions>
 			</plugin>
-				
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>${license-maven-plugin-version}</version>
+				<configuration>
+					<verbose>false</verbose>
+				</configuration>
+				<executions>
+					<execution>
+						<id>add-lincense</id>
+						<goals>
+							<goal>update-file-header</goal>
+						</goals>
+						<phase>process-sources</phase>
+						<configuration>
+							<licenseName>apache_v2</licenseName>
+							<organizationName>OmniPrise, LLC</organizationName>
+							<inceptionYear>2017</inceptionYear>
+							<roots>
+								<root>src/main</root>
+								<root>src/test</root>
+							</roots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>
