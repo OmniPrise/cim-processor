@@ -1,6 +1,6 @@
 .settings/
 target/
-validation/
+verification/
 .classpath
 .project
 .metadata/
@@ -13,6 +13,12 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+
+# Mac OS X .DS_Store
+.DS_Store
+
+# Content inv verification folder cannot be committed due to ERCOT rules
+verification/
 
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
