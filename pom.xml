@@ -2,11 +2,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.wemc.cim</groupId>
-	<artifactId>experimentation</artifactId>
+	<groupId>com.omniprise.cim</groupId>
+	<artifactId>cim-processor</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>CIM Experimentation</name>
-	<description>Project for experimentation with CIM</description>
+	<name>ERCOT CIM Processor</name>
+	<description>Process ERCOT CIM electric grid model</description>
 
 	<properties>
 		<slf4j-version>1.7.5</slf4j-version>
@@ -85,7 +85,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>com.wemc.cim.experimentation.ModelParser</mainClass>
+							<mainClass>com.omniprise.cim.processor.ModelParser</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -119,7 +119,7 @@
 							<xsdOptions>
 								<xsdOption>
 									<xsd>${basedir}/src/main/resources/schemas/parseModel.xsd</xsd>
-									<packagename>com.wemc.cim.experimentation.xml.model</packagename>
+									<packagename>com.omniprise.cim.parse.model</packagename>
 								</xsdOption>
 							</xsdOptions>
 						</configuration>

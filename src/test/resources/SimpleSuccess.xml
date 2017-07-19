@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<!-- comment -->
+	<child />
+	<child>
+		<value>value content</value>
+	</child>
+	<child name="test" />
+</root>

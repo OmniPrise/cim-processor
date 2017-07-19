@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+        targetNamespace="http://www.omniprise.com/cim/parse/model" 
+        xmlns:tns="http://www.omniprise.com/cim/parse/model" 
+        elementFormDefault="qualified">
+
+   	<xsd:complexType name="element">
+   		<xsd:sequence>
+   			<xsd:element name="element" type="tns:element" minOccurs="0" maxOccurs="unbounded" />
+   			<xsd:element name="attribute" type="tns:attribute" minOccurs="0" maxOccurs="unbounded" />
+   		</xsd:sequence>
+    	<xsd:attribute name="namespace" type="xsd:string" />
+    	<xsd:attribute name="className" type="xsd:string" />
+   		<xsd:attribute name="name" type="xsd:string" />
+   	</xsd:complexType>
+
+    <xsd:complexType name="attribute">
+    	<xsd:attribute name="namespace" type="xsd:string" />
+    	<xsd:attribute name="className" type="xsd:string" />
+    	<xsd:attribute name="name" type="xsd:string" />
+    </xsd:complexType>
+    
+    <xsd:complexType name="outage">
+    	<xsd:sequence>
+    		<xsd:element name="plannedStartDate" type="xsd:dateTime" />
+    		<xsd:element name="plannedEndDate" type="xsd:dateTime" />
+    		<xsd:element name="actualStartDate" minOccurs="0" type="xsd:dateTime" />
+    		<xsd:element name="actualEndDate" minOccurs="0" type="xsd:dateTime" />
+    		<xsd:element name="effectiveStartHour" minOccurs="0" type="xsd:dateTime" />
+    		<xsd:element name="effectiveEndHour" minOccurs="0" type="xsd:dateTime" />
+    		<xsd:element name="switchOutageStatus" type="tns:switchOutageStatus" minOccurs="0" />
+    		<xsd:element name="equipmentType" type="tns:equipmentType" />
+    		<xsd:element name="equipmentName" type="xsd:string" />
+    		<xsd:element name="equipmentFromStationName" type="xsd:string" />
+    		<xsd:element name="equipmentToStationName" type="xsd:string" minOccurs="0" />
+    		<xsd:element name="baseVoltage" type="xsd:string" minOccurs="0" />
+    		<xsd:element name="teid" type="xsd:int" />
+    		<xsd:element name="rdfGuid" type="xsd:string" />    		
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+	<xsd:simpleType name="equipmentType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="CB" />
+			<xsd:enumeration value="DSC" />
+			<xsd:enumeration value="LD" />
+			<xsd:enumeration value="LN" />
+			<xsd:enumeration value="SC" />
+			<xsd:enumeration value="SVC" />
+			<xsd:enumeration value="XF" />
+		</xsd:restriction>
+	</xsd:simpleType>
+    
+	<xsd:simpleType name="switchOutageStatus">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="C" />
+			<xsd:enumeration value="O" />
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>
