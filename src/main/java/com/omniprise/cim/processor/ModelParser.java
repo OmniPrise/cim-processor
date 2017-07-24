@@ -2009,16 +2009,8 @@ public class ModelParser {
 							}
 						} else if (nextChar == '!' && value.length() == 1) {
 							value.append(nextChar);
-							if (nextChar == '!') {
-								priorStep = startForEndTag(step);
-								step = Step.COMMENT_TAG_END;
-							} else if (nextChar == '/') {
-								step = Step.END_TAG_END;
-							} else if (nextChar == '>' || nextChar == '-' || Character.isWhitespace(nextChar)) {
-								step = Step.UNEXPECTED;
-							} else {
-								step = Step.START_TAG_END;
-							}
+							priorStep = startForEndTag(step);
+							step = Step.COMMENT_TAG_END;
 						} else {
 							value.append(nextChar);
 						}

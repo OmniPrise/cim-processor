@@ -38,7 +38,7 @@ public class BayNode extends AbstractEquipmentContainerNode {
 	public String getDiagramType() { return "bay"; }
 
 	@Override
-	public String toDiagram() { return "\t\t# node [fixedsize=shape shape=" + getDiagramShape() + " style=" + getDiagramStyle() + " color=" + getDiagramBorderColor() + " fillcolor=" + getDiagramFillColor() +" label=\"" + getDiagramLabel() + "\"] \"" + getDiagramName() + "\"; // "+ getDisplayName(); }
+	public String toDiagram() { return "\t\t# node [fixedsize=true shape=" + getDiagramShape() + " style=" + getDiagramStyle() + " color=" + getDiagramBorderColor() + " fillcolor=" + getDiagramFillColor() +" label=\"" + getDiagramLabel() + "\"] \"" + getDiagramName() + "\"; // "+ getDisplayName(); }
 
 	@Override
 	public String getDisplayName() { return "Bay"; }

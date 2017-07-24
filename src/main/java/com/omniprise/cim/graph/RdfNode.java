@@ -221,7 +221,7 @@ public abstract class RdfNode {
 	
 	public String getDiagramShape() { return "pentagon"; }
 	
-	public String toDiagram() { return "\t\tnode [fixedsize=shape shape=" + getDiagramShape() + " style=" + getDiagramStyle() + " color=" + getDiagramBorderColor() + " fillcolor=" + getDiagramFillColor() +" label=\"" + getDiagramLabel() + "\"] \"" + getDiagramName() + "\"; // "+ getDisplayName() + " " + getId(); }
+	public String toDiagram() { return "\t\tnode [fixedsize=true shape=" + getDiagramShape() + " style=" + getDiagramStyle() + " color=" + getDiagramBorderColor() + " fillcolor=" + getDiagramFillColor() +" label=\"" + getDiagramLabel() + "\"] \"" + getDiagramName() + "\"; // "+ getDisplayName() + " " + getId(); }
 	
 	public String toString() { return toIdentifier() + ",\"" + source.getDescription() + "\""; }
 
