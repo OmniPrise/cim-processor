@@ -13,7 +13,7 @@ The ERCOT  (Electric Eeliability Council of Texas) CIM Processor was implemented
 * Planned features not yet implemented
   * Producing PSSE Bus/Branch models from CIM
   * Producing Bus/Branch diagrams
-  * GUI front end to choose CIM model and Outage file, perform analysis, display one-line diagrams
+  * GUI front end to choose CIM model and (optional) Outage file, perform analysis, and display one-line diagrams
 
 The core system includes a CIM model parser and a number of analysis operations.  The current command line interface provides a simple mechanism for execution of the code against a single CIM file.
 
