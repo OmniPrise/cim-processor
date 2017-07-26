@@ -737,7 +737,6 @@ public class ModelParser {
 						if (!node.isVisited()) {
 							writer.println(node.toDiagram());
 							node.setVisited(true);
-							if (node.getId().equals("49F37FB1-B136-4260-B1D1-0A9A6DF4080E")) log.info("Entering equipment id " + node.getId() + " as modeled...");
 							equipmentModelState.put(node.getId(), true);
 						}
 						if (ConductingEquipmentNode.class.isInstance(node)) {
@@ -776,7 +775,6 @@ public class ModelParser {
 									if (!bayNode.isVisited()) {
 										writer.println(bayNode.toDiagram());
 										bayNode.setVisited(true);
-										if (bayNode.getId().equals("49F37FB1-B136-4260-B1D1-0A9A6DF4080E")) log.info("Entering equipment id " + bayNode.getId() + " as modeled...");
 										equipmentModelState.put(bayNode.getId(), true);
 									}
 									for (TerminalNode terminal : bayNode.getTerminals()) {
@@ -847,7 +845,6 @@ public class ModelParser {
 		log.debug("... check for unmodeled equipment...");
 		for (String equipmentId : equipmentModelState.keySet()) {
 			boolean modeled = equipmentModelState.get(equipmentId).booleanValue();
-			if (equipmentId.equals("49F37FB1-B136-4260-B1D1-0A9A6DF4080E")) log.info(equipmentId + " is marked as " + (modeled ? "" : "not ") + "modeled");
 			if (!modeled) {
 				if (!unmodeledEquipment) {
 					unmodeledEquipment = true;
