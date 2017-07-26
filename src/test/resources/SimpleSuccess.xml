@@ -19,11 +19,5 @@
   #L%
   -->
 
-<root>
-	<!-- comment -->
-	<child />
-	<child>
-		<value>value content</value>
-	</child>
-	<child name="test" />
-</root>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cim="http://iec.ch/TC57/2006/CIM-schema-cim10#" xmlns:spc="http://www.siemens-ptd/SHIMM1.0#" xmlns:etx="http://www.ercot.com/CIM11R0/2008/2.0/extension#">
+</rdf:RDF>
