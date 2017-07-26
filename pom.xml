@@ -40,6 +40,7 @@
 		<maven-assembly-plugin-version>2.4</maven-assembly-plugin-version>
 		<commons-lang-version>3.3.2</commons-lang-version>
 		<commons-csv-version>1.0</commons-csv-version>
+		<testng-version>6.11</testng-version>
 	</properties>
 
 	<dependencies>
@@ -68,6 +69,13 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-csv</artifactId>
 			<version>${commons-csv-version}</version>
+		</dependency>
+		<!-- testing -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng-version}</version>
+			<scope>test</scope>
 		</dependency>
 		<!-- licensing -->
 		<!-- dependency>
