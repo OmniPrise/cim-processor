@@ -228,12 +228,14 @@ public class ModelParser {
 				RdfGraph.connect(model);
 				if (diagramSubstationEquipment.size() > 0) {
 					for (String substationName : diagramSubstationEquipment) {
+						log.info("Creating substation diagram for " + substationName);
 						String fileName = substationName + ".gv";
 						diagramSubstation(substationName, fileName, model, false);
 					}
 				}
 				if (diagramLineSubstations.size() > 0) {
 					for (String lineName : diagramLineSubstations) {
+						log.info("Creating line substation diagram for " + lineName);
 						String fileName = "line-" + lineName + ".gv";
 						diagramLine(lineName, fileName, model);
 					}
@@ -726,7 +728,8 @@ public class ModelParser {
 				boolean nonTransformerWindingEquipment = false;
 				Map<String,TransformerWindingNode> transformerWindings = new HashMap<String,TransformerWindingNode>();
 				VoltageLevelNode voltageLevel = (VoltageLevelNode)RdfNode.findByNodeId(voltageLevelId.getId(), model);
-				writer.println("\tsubgraph \"" + substation.getName() + "-" + voltageLevel.getName() + "\" {");
+				writer.println("\tsubgraph \"cluster_" + substation.getName() + "-" + voltageLevel.getName() + "\" {");
+				writer.println("\t\tlabel=\"Voltage Level " + voltageLevel.getName() + "\"; graph[style=dotted];");
 				List<Rdf> voltageLevelEquipment = Rdf.findRdfByContainer(voltageLevel.getId()); 
 				if ( voltageLevelEquipment != null) {
 					for (Rdf rdf : voltageLevelEquipment) {
@@ -734,6 +737,7 @@ public class ModelParser {
 						if (!node.isVisited()) {
 							writer.println(node.toDiagram());
 							node.setVisited(true);
+							if (node.getId().equals("49F37FB1-B136-4260-B1D1-0A9A6DF4080E")) log.info("Entering equipment id " + node.getId() + " as modeled...");
 							equipmentModelState.put(node.getId(), true);
 						}
 						if (ConductingEquipmentNode.class.isInstance(node)) {
@@ -772,7 +776,8 @@ public class ModelParser {
 									if (!bayNode.isVisited()) {
 										writer.println(bayNode.toDiagram());
 										bayNode.setVisited(true);
-										equipmentModelState.put(node.getId(), true);
+										if (bayNode.getId().equals("49F37FB1-B136-4260-B1D1-0A9A6DF4080E")) log.info("Entering equipment id " + bayNode.getId() + " as modeled...");
+										equipmentModelState.put(bayNode.getId(), true);
 									}
 									for (TerminalNode terminal : bayNode.getTerminals()) {
 										if (!terminals.containsKey(terminal.getId())) terminals.put(terminal.getId(), terminal);
@@ -839,8 +844,10 @@ public class ModelParser {
 			writer.println("\t}");
 		}
 		boolean unmodeledEquipment = false;
+		log.debug("... check for unmodeled equipment...");
 		for (String equipmentId : equipmentModelState.keySet()) {
 			boolean modeled = equipmentModelState.get(equipmentId).booleanValue();
+			if (equipmentId.equals("49F37FB1-B136-4260-B1D1-0A9A6DF4080E")) log.info(equipmentId + " is marked as " + (modeled ? "" : "not ") + "modeled");
 			if (!modeled) {
 				if (!unmodeledEquipment) {
 					unmodeledEquipment = true;
@@ -1861,7 +1868,7 @@ public class ModelParser {
 		}
 	}
 
-	private enum Step { XML_TAG_START, START_TAG_START, END_TAG_START, TAG_START, VALUE, XML_TAG_END, START_TAG_END, END_TAG_END, COMMENT_TAG_END, TAG_END, UNEXPECTED, UNEXPECTED_TRAILING, DONE }
+	private enum Step { XML_TAG_START, START_TAG_START, END_TAG_START, TAG_START, VALUE, XML_TAG_END, START_TAG_END, END_TAG_END, COMMENT_TAG_END, TAG_END, UNEXPECTED, UNEXPECTED_LEADING, UNEXPECTED_TRAILING, DONE }
 	
 	private static long processCimFile(PushbackReader in) {
 		long result = 0L;
@@ -1878,8 +1885,23 @@ public class ModelParser {
 					testForBOM = false;
 					log.debug("...test byte order mark 0x" + Integer.toHexString(nextCharAsInt));
 					if (nextCharAsInt == 0xfffe || nextCharAsInt == 0xfeff) {
-						log.debug("... found byte order marker");
+						log.debug("... found UTF-16 byte order mark");
 						continue;
+					} else if (nextCharAsInt == 0xef) {
+						log.debug("... check for UTF-8 byte order mark");
+						int secondBomByte = in.read();
+						if (secondBomByte == 0xbb) {
+							int thirdBomByte = in.read();
+							if (thirdBomByte == 0xBF) {
+								log.debug("... found byte order mark 0xef 0xbb 0xbf for UTF-8");
+								continue;
+							} else {
+								in.unread(thirdBomByte);
+								in.unread(secondBomByte);
+							}
+						} else {
+							in.unread(secondBomByte);
+						}
 					}
 				}
 				char nextChar = (char)nextCharAsInt;
@@ -1902,12 +1924,14 @@ public class ModelParser {
 							if (step == Step.TAG_START) {
 								step = Step.VALUE;
 							} else {
-								step = Step.UNEXPECTED;
+								if (step == Step.XML_TAG_START) step = Step.UNEXPECTED_LEADING;
+								else step = Step.UNEXPECTED;
 							}
 						}
 						break;
 					case VALUE:
 					case UNEXPECTED:
+					case UNEXPECTED_LEADING:
 						// consume everything to the next '<'
 						// TODO: Later will need to detect a comment in the value - hopefully this won't blow up right now
 						if (nextChar == '<') {
@@ -1919,7 +1943,9 @@ public class ModelParser {
 							} else {
 								log.info("Unexpected character(s) stream : " + value.toString());
 								errors++;
-								step = Step.TAG_START;
+								if (step == Step.UNEXPECTED_LEADING) step = Step.XML_TAG_START;
+								else step = Step.TAG_START;
+								
 							}
 							value.setLength(0);
 						} else {

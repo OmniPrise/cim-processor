@@ -24,7 +24,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.omniprise.cim</groupId>
 	<artifactId>cim-processor</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.2.0-SNAPSHOT</version>
 	<name>ERCOT CIM Processor</name>
 	<description>Process ERCOT CIM electric grid model</description>
 
@@ -55,11 +55,6 @@
 			<version>${slf4j-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${slf4j-version}</version>
-		</dependency>
-		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>${log4j-version}</version>
@@ -75,11 +70,11 @@
 			<version>${commons-csv-version}</version>
 		</dependency>
 		<!-- licensing -->
-		<dependency>
+		<!-- dependency>
 			<groupId>org.codehaus.mojo</groupId>
 			<artifactId>license-maven-plugin</artifactId>
 			<version>${license-maven-plugin-version}</version>
-		</dependency>
+		</dependency -->
 	</dependencies>
 	<build>
 		<defaultGoal>install</defaultGoal>
@@ -154,7 +149,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
+			<!-- plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>license-maven-plugin</artifactId>
 				<version>${license-maven-plugin-version}</version>
@@ -179,7 +174,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin -->
 		</plugins>
 	</build>
 </project>

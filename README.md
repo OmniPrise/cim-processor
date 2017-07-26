@@ -26,7 +26,7 @@ Further, future plans include implementing a GUI, likely as a separate project a
 ERCOT rules do not permit unauthorized access to CIM files, and therefore it is not possible to post an actual ERCOT CIM file for testing, though one of the steps to Unit Testing is to produce a few artificial CIM models from scratch.  However, assuming a CIM model file is available, and the code has been checked out and built, then an example use of the command line interface would be:
 
 ```bash
-java -Xss64m -jar ../target/cim-processor-0.0.1-SNAPSHOT-jar-with-dependencies.jar -cimFile CIM_MMDDYYYY_Redacted.xml -substationDiagram SC > diagrams.txt
+java -Xss64m -jar ../target/cim-processor-0.2.0-SNAPSHOT-jar-with-dependencies.jar -cimFile CIM_MMDDYYYY_Redacted.xml -substationDiagram SC > diagrams.txt
 ```
 
 This would produce a processing report to diagrams.txt as well as a Graphvis DOT file named SC.gv.  The SC.gv file could then be processed by Graphvis.  For example:
@@ -40,5 +40,5 @@ would use Graphvis' Neato layout tool to create an SVG file which could, in turn
 Command line interface help is available:
 
 ```bash
-java -jar ../target/cim-processor-0.0.1-SNAPSHOT-jar-with-dependencies.jar -help
+java -jar ../target/cim-processor-0.2.0-SNAPSHOT-jar-with-dependencies.jar -help
 ```
