@@ -29,10 +29,10 @@ ERCOT rules do not permit unauthorized access to CIM files, and therefore it is 
 java -Xss64m -jar ../target/cim-processor-0.2.0-SNAPSHOT-jar-with-dependencies.jar -cimFile CIM_MMDDYYYY_Redacted.xml -substationDiagram SC > diagrams.txt
 ```
 
-This would produce a processing report to diagrams.txt as well as a Graphvis DOT file named SC.gv.  The SC.gv file could then be processed by Graphvis.  For example:
+This would produce a processing report to diagrams.txt as well as a Graphvis DOT file named SC.dot.  The SC.dot file could then be processed by Graphvis.  For example:
 
 ```bash
-neato -Tsvg < SC.gv > SC.svg
+neato -Tsvg < SC.dot > SC.svg
 ```
 
 would use Graphvis' Neato layout tool to create an SVG file which could, in turn, be displayed using a Broswer like IE or Chrome.

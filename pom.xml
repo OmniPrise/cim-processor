@@ -29,6 +29,8 @@
 	<description>Process ERCOT CIM electric grid model</description>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<slf4j-version>1.7.5</slf4j-version>
 		<log4j-version>1.2.17</log4j-version>
 		<java-version>1.7</java-version>
@@ -36,6 +38,7 @@
 		<maven-resources-plugin-version>2.4.3</maven-resources-plugin-version>
 		<maven-resources-plugin-encoding>UTF-8</maven-resources-plugin-encoding>
 		<license-maven-plugin-version>1.13</license-maven-plugin-version>
+		<license-maven-plugin-encoding>UTF-8</license-maven-plugin-encoding>
 		<cxf-xjc-plugin-version>2.7.0</cxf-xjc-plugin-version>
 		<maven-assembly-plugin-version>2.4</maven-assembly-plugin-version>
 		<commons-lang-version>3.3.2</commons-lang-version>
@@ -157,7 +160,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>license-maven-plugin</artifactId>
 				<version>${license-maven-plugin-version}</version>
@@ -179,10 +182,11 @@
 								<root>src/main</root>
 								<root>src/test</root>
 							</roots>
+							<encoding>${license-maven-plugin-encoding}</encoding>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin -->
+			</plugin>
 		</plugins>
 	</build>
 </project>

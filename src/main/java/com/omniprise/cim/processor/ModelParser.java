@@ -229,14 +229,14 @@ public class ModelParser {
 				if (diagramSubstationEquipment.size() > 0) {
 					for (String substationName : diagramSubstationEquipment) {
 						log.info("Creating substation diagram for " + substationName);
-						String fileName = substationName + ".gv";
+						String fileName = substationName + ".dot";
 						diagramSubstation(substationName, fileName, model, false);
 					}
 				}
 				if (diagramLineSubstations.size() > 0) {
 					for (String lineName : diagramLineSubstations) {
 						log.info("Creating line substation diagram for " + lineName);
-						String fileName = "line-" + lineName + ".gv";
+						String fileName = "line-" + lineName + ".dot";
 						diagramLine(lineName, fileName, model);
 					}
 				}
@@ -251,13 +251,15 @@ public class ModelParser {
 				}
 				if (outages.size() > 0 && diagramSubstationEquipment.size() > 0) {
 					for (String substationName : diagramSubstationEquipment) {
-						String fileName = substationName + "-outage.gv";
+						String fileName = substationName + "-outage.dot";
+						log.info("Creating substation diagram for " + substationName + " with outages");
 						diagramSubstation(substationName, fileName, model, false);
 					}
 				}
 				if (diagramLineSubstations.size() > 0) {
 					for (String lineName : diagramLineSubstations) {
-						String fileName = "line-" + lineName + "-outage.gv";
+						String fileName = "line-" + lineName + "-outage.dot";
+						log.info("Creating line substation diagram for " + lineName + " with outages");
 						diagramLine(lineName, fileName, model);
 					}
 				}
